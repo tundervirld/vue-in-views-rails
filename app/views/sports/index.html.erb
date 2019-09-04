@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>State</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sports.each do |sport| %>
+      <tr>
+        <td><%= sport.name %></td>
+        <td><%= sport.description %></td>
+        <td><%= sport.state %></td>
+        <td><%= link_to 'Show', sport %></td>
+        <td><%= link_to 'Edit', edit_sport_path(sport) %></td>
+        <td><%= link_to 'Destroy', sport, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<div id="sports-section">
+  <h1>{{message}}</h1>
+  <span/>{{errors}}</span>
+  <br>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="sport in sports.data">
+        <td>{{ sport.id }}</td>
+        <td>{{ sport.name }}</td>
+        <td>
+          <div v-if="sport.state==0" class="btn btn-sm btn-default"
+                @click="publish(sport)">Publish
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'New Sport', new_sport_path %>
