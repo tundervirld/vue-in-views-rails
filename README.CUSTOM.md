@@ -36,6 +36,15 @@ rails generate controller Main index
 
 rails generate scaffold sport name:string description:text state:boolean
 rake db:migrate
+
+#in model app/models/sport.rb add to set in true new register in model
+class Sport < ApplicationRecord
+    before_create :default_values
+    def default_values
+        self.state ||= 1
+    end
+end
+
 ```
 
 #### Generar Seed
@@ -134,6 +143,62 @@ div id="sports-section">
 #file: app/javascript/packs/application.js
 import Sport from './sport';
 ```
+
+#2 Da parte
+
+### Step by Step Client
+## Creating Crud Patient
+```sh
+#Build Curd Patient
+rails generate scaffold patient rut:string name:string email:string phone:string state:boolean
+rake db:migrate
+
+#in model app/models/patient.rb add this to set in true new register in model
+class Patient < ApplicationRecord
+    before_create :default_values
+    def default_values
+        self.state ||= 1
+    end
+end
+```
+
+## Adding Fake info to model Patient
+Gem Fake in your project
+```sh
+#add fake gem to  Gemfile
+group :development do
+  ...
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+end
+
+# After in your temrinal execute:
+bundle install
+```
+Configure to save seed in DB
+```sh
+#add fake info in model
+rake db:seed
+
+#if you need review the info in your data base, in your console execute:
+rails c
+Patient.all
+#or
+Patient.count()
+```
+
+#### Importar el archivo JS Patient a la App
+```sh
+import Patien from './patient';
+```
+
+#### Changues in Core App
+```sh
+#app/controllers/patients_controller.rb
+def patient_params
+    params.require(:patient).permit(:rut, :nombre, :mail, :telefono, :state)
+end
+```
+
 
 # Documentation:
 - https://jdc.io/rails-migration-data-types-mysql-postgresql-sqlite

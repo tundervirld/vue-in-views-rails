@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rut: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  state: false
+
+two:
+  rut: MyString
+  name: MyString
+  email: MyString
+  phone: MyString
+  state: false

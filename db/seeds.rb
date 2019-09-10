@@ -13,3 +13,15 @@ if Sport.count == 0
     Sport.create(name: "Maraton", description: "Deporte Maraton")
     Sport.create(name: "Ciclismo", description: "Deporte Ciclismo")
 end
+
+if Patient.count == 0
+    25.times do
+        Patient.create(
+        rut: Faker::ChileRut.full_rut,
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        phone: Faker::PhoneNumber.cell_phone,
+        state: Faker::Boolean.boolean
+        )
+    end
+end

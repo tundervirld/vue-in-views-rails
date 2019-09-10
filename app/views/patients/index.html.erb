@@ -1,0 +1,157 @@
+<p id="notice"><%= notice %></p>
+
+
+<div id="patients-section"><!-- Init patients-section -->
+  <p style="color:red">{{errors.data}}</p>
+  <h1>New Patients</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rut</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <input type="text" v-model="patient.rut"/> <br/>
+          <span style="color:red">{{errors.rut}}</span>
+        </td>
+
+        <td>
+          <input type="text" v-model="patient.name"/> <br/>
+          <span style="color:red">{{errors.name}}</span>
+        </td>
+
+
+        <td>
+          <input type="email" v-model="patient.email"/> <br/>
+          <span style="color:red">{{errors.email}}</span>
+        </td>
+
+        <td>
+          <input type="text" v-model="patient.phone"/>
+          <span style="color:red">{{errors.phone}}</span>
+        </td>
+
+
+        <td>
+          <input type="checkbox" v-model="patient.state"/>
+        </td>
+        
+        
+        <td>
+          <button @click="hirePatient">Save</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<br>
+  
+  <h1>Patients List</h1>
+  
+    <hr> 
+      <table  border="1" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th>Rut</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="patient in patients">
+            <td>{{patient.id}}</td>
+            <td>{{patient.rut}}</td>
+            <td>{{patient.name}}</td>
+            <td>{{patient.email}}</td>
+            <td>{{patient.phone}}</td>
+            <td>{{patient.state}}</td>
+        </tbody>
+        </table>
+    <hr>
+
+<br>
+    <h1>Editable List</h1>
+    <table border="1" cellspacing="0" cellpadding="0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Rut</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Status</th>
+          <th colspan="3">Options</th>
+        </tr>
+      </thead>
+      <tbody
+        is="patient-component"
+        v-for="chicle in patients"
+        :patito="chicle">
+      </tbody>
+    </table>
+
+    <script type="text/x-template" id="patient-template">
+      <tr>
+        <td>
+          <div v-if="editionMode">
+            <input type="text" v-model="mensajito.id"/> <br/>
+            <span style="color:red">{{errors.id}}</span>
+          </div>
+          <div v-else><span v-html="mensajito.id"></span></div>
+        </td>
+        <td>
+          <div v-if="editionMode">
+            <input type="text" v-model="mensajito.rut"/> <br/>
+            <span style="color:red">{{errors.rut}}</span>
+          </div>
+          <div v-else><span v-html="mensajito.rut"></span></div>
+        </td>
+        <td>
+          <div v-if="editionMode">
+            <input type="text" v-model="mensajito.name"/> <br/>
+            <span style="color:red">{{errors.name}}</span>
+          </div>
+          <div v-else><span v-html="mensajito.name"></span></div>
+        </td>
+        <td>
+          <div v-if="editionMode">
+              <input type="email" v-model="mensajito.email"/> <br/>
+              <span style="color:red">{{errors.email}}</span>
+          </div>
+          <div v-else><span v-html="mensajito.email"></span></div>
+        </td>
+        <td>
+          <div v-if="editionMode">
+              <input type="text" v-model="mensajito.phone"/> <br/>
+              <span style="color:red">{{errors.phone}}</span>
+          </div>
+          <div v-else><span v-html="mensajito.phone"></span></div>
+        </td>
+        <td>
+            <input type="checkbox" v-model="mensajito.state"/>
+        </td>
+        <td>
+          <button v-if="editionMode" @click="updatePatient">Save</button>
+          <button v-else @click="editionMode = true">Edit</button>
+          <button v-if="!editionMode" @click="togglePatientStatus">
+            
+          </button>
+          <button v-if="!editionMode" @click="deletePatient" style="color:red">Delete</button>
+        </td>
+      </tr>
+    </script>
+
+  </div><!-- END patients-section -->
+
+<%= link_to 'New Patient', new_patient_path %>
+  <div id="sports-section">
+  </div>
