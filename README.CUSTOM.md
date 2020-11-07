@@ -17,10 +17,10 @@ Despues del paso anterior, se creó un aplicación rails, este mismo procedimien
 #Levantar la instancia Docker con mi App Rails
 docker run -it --rm \
 -p 3006:3000 \
---network docker-compose-base-dev_backennetwork \
+--network docker-compose-base-server_base-server-network \
 --env-file .env.docker \
 -v $(pwd):/myrailsapp \
---name docker-instance-${PWD##*/}-${RANDOM} image-base-railsapp-ruby:2.6
+--name docker-instance-${PWD##*/}-${RANDOM} local/image-base-railsapp-ruby:2.6
 
 ```
 
@@ -30,7 +30,7 @@ docker run -it --rm \
 yarn add vue-turbolinks
 yarn add axios
 
-#Levantar la instancia Docker con mi App Rails
+#Generate Controller main in rails app
 rails generate controller Main index
 
 
@@ -110,7 +110,7 @@ var sport = new Vue({
 #### Agregar la lectura de la respuesta a la vista de Sports
 ```sh
 #app/views/sports/index.html.erb
-div id="sports-section">
+<div id="sports-section">
   <h1>{{message}}</h1>
   <span/>{{errors}}</span>
   <br>
@@ -203,3 +203,4 @@ end
 # Documentation:
 - https://jdc.io/rails-migration-data-types-mysql-postgresql-sqlite
 - https://gist.github.com/przbadu/084197ea821a98b0e177b266b41ba0a2
+- https://github.com/glinesbdev/rails-vue-todo-app

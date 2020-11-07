@@ -24,13 +24,6 @@ export default document.addEventListener('turbolinks:load', () => {
           errors: {},
         }
       },
-      // data() {
-      //   return {
-      //     editionMode: false,
-      //     mensajito: true,
-      //     havePowers: false,
-      //   };
-      // },
       computed: {
         changeCasa: {
           get() {
@@ -52,8 +45,6 @@ export default document.addEventListener('turbolinks:load', () => {
 
         // ajax call to update an patient
         updatePatient() {
-          var that;
-          that = this;
           axios
             .put(`/patients/${this.patito.id}.json`, {
               patient: this.patito,
@@ -62,14 +53,15 @@ export default document.addEventListener('turbolinks:load', () => {
               // Turbolinks.visit(`/patients`);
               this.errors = {};
               this.mensajito = response.data;
-              this.editMode = false;
+              this.editionMode = false;
             })
             .catch(error => {
               this.errors = error.response && error.response.data;
               console.log(this.errors);
             });
         },
-
+        
+        // ajax call to delete an patient
         deletePatient() {
           axios
             .delete(`/patients/${this.patito.id}.json`)
@@ -97,7 +89,7 @@ export default document.addEventListener('turbolinks:load', () => {
         };
       },
       //Method Trigger in the chargue of Page
-      mounted() {
+      created() {
         axios
           .get('/patients.json')
           .then(response => {
